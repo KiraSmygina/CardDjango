@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>{{ page_name }}</h1>
+    <p>Привет, {{ user_name }}! Тебе {{ user_age }} лет.</p>
+
+    <div class="cards-container">
+        {% for dance in dances %}
+        <div class="card">
+            {% if forloop.first %}
+            <div class="sale-icon">SALE</div>
+            {% endif %}
+            <img src="{% static dance.photo %}" alt="{{ dance.name }}">
+            <h2>{{ dance.name }}</h2>
+            <p>Уровни: {{ dance.levels|join:", " }}</p>
+            <ul>
+                {% for key, value in dance.info.items %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+                {% endfor %}
+            </ul>
+            <button class="save-btn">Сохранить</button>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
